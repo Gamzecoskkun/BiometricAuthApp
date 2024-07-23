@@ -68,5 +68,5 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
 
 
-    implementation(libs.androidx.biometric)
+    implementation(libs.androidx.biometric.v120alpha03)
 }
