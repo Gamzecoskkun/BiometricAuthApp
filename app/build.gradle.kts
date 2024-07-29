@@ -1,3 +1,5 @@
+
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
@@ -69,6 +71,6 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
 
 
-    implementation(libs.androidx.biometric)
+    implementation(libs.androidx.biometric.ktx)
     implementation(libs.appcompat)
 }
