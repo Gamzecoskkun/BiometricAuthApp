@@ -13,10 +13,12 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.biometric.BiometricManager
 import androidx.biometric.BiometricManager.*
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -28,8 +30,11 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontVariation
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.gamzecoskun.biometricauthapp.BiometricPromptManager.*
 import com.gamzecoskun.biometricauthapp.BiometricPromptManager.BiometricResult.*
 import com.gamzecoskun.biometricauthapp.ui.theme.BiometricAuthAppTheme
@@ -49,6 +54,8 @@ class MainActivity : AppCompatActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
+
+
                     val biometricResult by promptManager.promptResults.collectAsState(
                         initial = null
                     )
@@ -79,12 +86,15 @@ class MainActivity : AppCompatActivity() {
                         verticalArrangement = Arrangement.Center,
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
+                        DisplayImage()
+
                         Button(onClick = {
                             promptManager.showBiometricPrompt(
                                 title = "Sample prompt",
                                 description = "Sample prompt description"
                             )
                         }) {
+                            
                             Text(text = "Authenticate")
                         }
                         biometricResult?.let { result ->
@@ -124,6 +134,17 @@ class MainActivity : AppCompatActivity() {
     }
 }
 
+@Composable
+fun DisplayImage() {
+    val image: Painter = painterResource(id = R.drawable.finger)
+    Image(
+        painter = image,
+        contentDescription = "My Image",
+        modifier = Modifier
+            .size(200.dp)
+            .padding(16.dp)
+    )
+}
 
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
@@ -138,5 +159,6 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 fun GreetingPreview() {
     BiometricAuthAppTheme {
         Greeting("Android")
+        DisplayImage()
     }
 }

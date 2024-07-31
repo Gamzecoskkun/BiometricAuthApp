@@ -88,6 +88,8 @@ class BiometricPromptManager(
 
     }
 
+
+
     sealed interface BiometricResult {
         data object HardwareUnavailable : BiometricResult
         data object FeatureUnavailable : BiometricResult
